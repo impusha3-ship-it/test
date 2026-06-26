@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>О & Д — Botanical Bloom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --linen:#f1f0e7;--linen2:#e8eee1;--ink:#2e352a;--ink2:#52594a;--mut:#8a907e;
+  --sage:#7a9e78;--sage-d:#5e8260;--terra:#c47a5a;--terra-d:#a85f40;--line:#d8dccb;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Hanken Grotesk',sans-serif;color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background:var(--linen);
+  background-image:
+    radial-gradient(ellipse 70% 50% at 10% 0%,rgba(122,158,120,.16),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 95% 100%,rgba(196,122,90,.14),transparent 60%),
+    linear-gradient(160deg,#f3f2ea,#eaefe2)}
+body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.4;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+
+h1,h2,h3,.serif{font-family:'Fraunces',serif;font-weight:500}
+.it{font-style:italic}
+
+/* decorative sprig */
+.sprig{position:fixed;pointer-events:none;z-index:0;opacity:.5}
+.sprig.tl{top:60px;left:-10px;width:160px;transform:rotate(8deg)}
+.sprig.br{bottom:-20px;right:-10px;width:200px;transform:rotate(-160deg)}
+.sprig path,.sprig line{stroke:var(--sage);stroke-width:1.4;fill:none;stroke-linecap:round}
+.sprig .leaf{fill:rgba(122,158,120,.18);stroke:var(--sage-d);stroke-width:1}
+
+.nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:1.2rem;padding:1.1rem 2rem;
+  background:rgba(241,240,231,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.logo{font-family:'Fraunces';font-size:23px;font-weight:500;letter-spacing:.02em}
+.logo em{color:var(--terra);font-style:italic}
+.tabs{display:flex;gap:.2rem;margin-left:auto;flex-wrap:wrap}
+.tab{background:none;border:none;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);padding:.5rem .9rem;cursor:pointer;border-radius:99px;transition:.25s;font-weight:500}
+.tab:hover{color:var(--ink)}
+.tab.on{background:var(--sage);color:#fff}
+.back{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);text-decoration:none;border:1px solid var(--line);padding:.45rem .9rem;border-radius:99px;transition:.25s}
+.back:hover{border-color:var(--sage);color:var(--sage-d)}
+
+.wrap{max-width:1060px;margin:0 auto;padding:0 2rem 7rem;position:relative;z-index:1}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* hero */
+.hero{text-align:center;padding:5.5rem 1rem 3.5rem}
+.kick{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--mut);margin-bottom:1.4rem}
+.bignum{font-family:'Fraunces';font-weight:400;font-size:clamp(88px,20vw,230px);line-height:.9;color:var(--ink);letter-spacing:-.01em}
+.bignum em{font-style:italic;color:var(--terra)}
+.unit{font-size:13px;letter-spacing:.4em;text-transform:uppercase;color:var(--ink2);margin-top:1.2rem}
+.since{font-family:'Fraunces';font-style:italic;font-size:19px;color:var(--ink2);margin-top:1.8rem}
+/* growth stalk */
+.stalk{margin:2.4rem auto 0;width:2px;height:0;background:var(--sage-d);position:relative;transition:height 1.4s cubic-bezier(.22,1,.36,1)}
+.stalk.grow{height:90px}
+.stalk i{position:absolute;width:26px;height:14px;border-radius:0 100% 0 100%/0 100% 0 100%;background:rgba(122,158,120,.4);border:1px solid var(--sage-d);opacity:0;transition:opacity .5s}
+.stalk.grow i{opacity:1}
+.stalk i.l1{top:18px;left:0;transform:translateX(-100%) rotate(-12deg)}
+.stalk i.l2{top:42px;left:2px;transform:rotate(12deg)}
+.stalk i.l3{top:62px;left:0;transform:translateX(-100%) rotate(-12deg)}
+
+.clock{display:flex;justify-content:center;gap:1.2rem;margin-top:2.4rem;flex-wrap:wrap}
+.cu{min-width:80px;padding:1rem .6rem;text-align:center}
+.cu b{font-family:'Fraunces';font-size:40px;font-weight:500;display:block;line-height:1;font-variant-numeric:tabular-nums;color:var(--sage-d)}
+.cu span{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin-top:6px;display:block}
+
+.sectit{display:flex;align-items:baseline;gap:1rem;margin:0 0 1.7rem}
+.sectit h2{font-size:clamp(26px,4vw,38px)}
+.sectit .leafmark{color:var(--sage);font-size:18px}
+.sectit .rule{flex:1;height:1px;background:var(--line)}
+
+/* cards */
+.card{background:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:18px;
+  box-shadow:0 18px 40px -28px rgba(60,80,50,.4);
+  transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s,border-color .4s}
+.card:hover{transform:translateY(-4px);border-color:var(--sage);box-shadow:0 26px 50px -26px rgba(60,80,50,.45)}
+
+/* milestones */
+.ms-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.ms{padding:1.5rem}
+.ms .l{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.ms .v{font-family:'Fraunces';font-size:44px;font-weight:500;line-height:1;margin-top:.4rem}
+.ms:nth-child(even) .v{color:var(--terra)}.ms:nth-child(odd) .v{color:var(--sage-d)}
+.ms .s{font-size:13px;color:var(--ink2);margin-top:.3rem}
+
+/* profiles */
+.profiles{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.profiles{grid-template-columns:1fr}}
+.pcard{padding:1.7rem;position:relative;overflow:hidden}
+.pcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.pcard.d::before{background:var(--sage)}.pcard.o::before{background:var(--terra)}
+.pcard .who{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+.pcard .task{font-family:'Fraunces';font-style:italic;font-size:18px;color:var(--ink2);margin:.4rem 0 1rem}
+.pcard .streak{font-family:'Fraunces';font-size:52px;font-weight:500;line-height:1}
+.pcard.d .streak{color:var(--sage-d)}.pcard.o .streak{color:var(--terra-d)}
+.pcard .streak span{font-family:'Hanken Grotesk';font-size:13px;color:var(--mut);margin-left:8px}
+.vine{height:7px;border-radius:99px;background:rgba(122,158,120,.16);margin-top:1.1rem;overflow:hidden}
+.vine i{display:block;height:100%;width:0;border-radius:99px;transition:width 1.3s cubic-bezier(.22,1,.36,1)}
+.pcard.d .vine i{background:linear-gradient(90deg,var(--sage),var(--sage-d))}
+.pcard.o .vine i{background:linear-gradient(90deg,#dba07e,var(--terra))}
+
+/* letters */
+.lt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.env{padding:1.5rem;min-height:175px;display:flex;flex-direction:column;cursor:pointer;position:relative;overflow:hidden}
+.env .from{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.wax{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;
+  font-family:'Fraunces';font-style:italic;font-size:18px;margin:.7rem 0;background:var(--terra);box-shadow:0 4px 10px -3px rgba(168,95,64,.6)}
+.env.d .wax{background:var(--sage);box-shadow:0 4px 10px -3px rgba(94,130,96,.6)}
+.env .status{margin-top:auto;font-size:13.5px;color:var(--ink2)}
+.env .preview{font-family:'Fraunces';font-style:italic;font-size:17px;line-height:1.4;color:var(--ink)}
+.env.unlocked{border-color:var(--sage)}
+.hint{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage-d);margin-top:.6rem}
+
+/* achievements */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.ach{padding:1.1rem 1.2rem;display:flex;align-items:center;gap:.9rem}
+.ach .ico{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;background:rgba(122,158,120,.12);border:1px solid var(--line)}
+.ach .txt{font-family:'Fraunces';font-size:17px;font-weight:500;line-height:1.25}
+.ach.done{border-color:var(--sage);background:linear-gradient(135deg,rgba(122,158,120,.18),rgba(196,122,90,.08))}
+.ach.done .ico{background:var(--sage);border-color:var(--sage);color:#fff}
+.ach .tick{margin-left:auto;width:22px;height:22px;border-radius:50%;background:var(--sage);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.ach:not(.done) .tick{display:none}
+
+.page{display:none}.page.on{display:block}
+.foot{text-align:center;color:var(--mut);font-size:13px;margin-top:5rem}
+.foot a{color:var(--sage-d);text-decoration:none}
+</style>
+</head>
+<body>
+<svg class="sprig tl" viewBox="0 0 100 200"><path d="M50 200 C50 150 45 120 50 80 C53 50 50 20 50 0"/><path class="leaf" d="M50 120 C30 110 20 120 18 135 C35 138 48 132 50 120Z"/><path class="leaf" d="M50 90 C70 80 80 90 82 105 C65 108 52 102 50 90Z"/><path class="leaf" d="M50 55 C32 48 24 58 22 70 C38 72 49 66 50 55Z"/></svg>
+<svg class="sprig br" viewBox="0 0 100 200"><path d="M50 200 C50 150 45 120 50 80 C53 50 50 20 50 0"/><path class="leaf" d="M50 120 C30 110 20 120 18 135 C35 138 48 132 50 120Z"/><path class="leaf" d="M50 90 C70 80 80 90 82 105 C65 108 52 102 50 90Z"/></svg>
+
+<nav class="nav">
+  <div class="logo">О <em>&amp;</em> Д</div>
+  <div class="tabs">
+    <button class="tab on" data-p="together">Вместе</button>
+    <button class="tab" data-p="cal">Календарь</button>
+    <button class="tab" data-p="letters">Письма</button>
+    <button class="tab" data-p="ach">Достижения</button>
+  </div>
+  <a class="back" href="index.html">← стили</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- TOGETHER -->
+  <section class="page on" id="together">
+    <div class="hero">
+      <div class="kick reveal">мы растём вместе уже</div>
+      <div class="bignum reveal">8<em>4</em>7</div>
+      <div class="unit reveal">дней рядом</div>
+      <div class="stalk" id="stalk"><i class="l1"></i><i class="l2"></i><i class="l3"></i></div>
+      <div class="clock reveal">
+        <div class="cu"><b>2</b><span>года</span></div>
+        <div class="cu"><b>3</b><span>мес</span></div>
+        <div class="cu"><b>27</b><span>дней</span></div>
+        <div class="cu"><b>13</b><span>часов</span></div>
+      </div>
+      <div class="since reveal">посажено 28 февраля 2024 — и продолжает цвести</div>
+    </div>
+
+    <div class="sectit reveal"><span class="leafmark">❧</span><h2 class="serif">Наши вехи</h2><span class="rule"></span></div>
+    <div class="ms-grid reveal">
+      <div class="ms card"><div class="l">первый поцелуй</div><div class="v">847</div><div class="s">дней назад</div></div>
+      <div class="ms card"><div class="l">путешествий</div><div class="v">6</div><div class="s">городов вдвоём</div></div>
+      <div class="ms card"><div class="l">общих утра</div><div class="v">312</div><div class="s">кофе на двоих</div></div>
+      <div class="ms card"><div class="l">до годовщины №3</div><div class="v">158</div><div class="s">дней осталось</div></div>
+    </div>
+  </section>
+
+  <!-- CALENDAR -->
+  <section class="page" id="cal">
+    <div style="height:3rem"></div>
+    <div class="sectit reveal"><span class="leafmark">❧</span><h2 class="serif">Привычки растут</h2><span class="rule"></span></div>
+    <div class="profiles">
+      <div class="pcard card d reveal">
+        <div class="who">Дима</div>
+        <div class="task serif">тренировка + без сахара</div>
+        <div class="streak">23<span>дня подряд 🌿</span></div>
+        <div class="vine"><i data-w="76"></i></div>
+      </div>
+      <div class="pcard card o reveal">
+        <div class="who">Оля</div>
+        <div class="task serif">йога каждое утро</div>
+        <div class="streak">31<span>день подряд 🌿</span></div>
+        <div class="vine"><i data-w="91"></i></div>
+      </div>
+    </div>
+    <p class="since reveal">Каждый выполненный день — новый лист на стебле. Серия не прерывалась с начала месяца.</p>
+  </section>
+
+  <!-- LETTERS -->
+  <section class="page" id="letters">
+    <div style="height:3rem"></div>
+    <div class="sectit reveal"><span class="leafmark">❧</span><h2 class="serif">Запечатанные письма</h2><span class="rule"></span></div>
+    <div class="lt-grid reveal">
+      <div class="env card d unlocked"><div class="from">от Димы</div><div class="wax">Д</div><div class="preview">«Открой, когда будет тяжело…»</div><div class="hint">нажми, чтобы открыть</div></div>
+      <div class="env card o"><div class="from">от Оли</div><div class="wax">О</div><div class="status">🔒 откроется 31 декабря</div></div>
+      <div class="env card d"><div class="from">от Димы</div><div class="wax">Д</div><div class="status">🔒 откроется в годовщину</div></div>
+      <div class="env card o unlocked"><div class="from">от Оли</div><div class="wax">О</div><div class="preview">«Спасибо, что ты есть…»</div><div class="hint">нажми, чтобы открыть</div></div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section class="page" id="ach">
+    <div style="height:3rem"></div>
+    <div class="sectit reveal"><span class="leafmark">❧</span><h2 class="serif">Достижения · 14/22</h2><span class="rule"></span></div>
+    <div class="ach-grid reveal">
+      <div class="ach card done"><div class="ico">💌</div><div class="txt">Первое письмо</div><div class="tick">✓</div></div>
+      <div class="ach card done"><div class="ico">🌍</div><div class="txt">Первое путешествие</div><div class="tick">✓</div></div>
+      <div class="ach card done"><div class="ico">🌿</div><div class="txt">Серия 7 дней</div><div class="tick">✓</div></div>
+      <div class="ach card"><div class="ico">🏔️</div><div class="txt">10 городов вдвоём</div></div>
+      <div class="ach card done"><div class="ico">🌙</div><div class="txt">100 дней вместе</div><div class="tick">✓</div></div>
+      <div class="ach card"><div class="ico">💍</div><div class="txt">1000 дней</div></div>
+    </div>
+  </section>
+
+  <div class="foot">Botanical Bloom · концепт 03 · <a href="index.html">← к остальным стилям</a></div>
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
+  t.classList.add('on');document.getElementById(t.dataset.p).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});runReveal();
+}));
+function runReveal(){
+  document.querySelectorAll('.page.on .reveal').forEach((el,i)=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight-60){setTimeout(()=>el.classList.add('in'),i*70)}
+  });
+  document.querySelectorAll('.page.on .vine i').forEach(b=>b.style.width=b.dataset.w+'%');
+  const s=document.getElementById('stalk');if(s){const r=s.getBoundingClientRect();if(r.top<window.innerHeight-40)s.classList.add('grow')}
+}
+window.addEventListener('scroll',runReveal,{passive:true});
+window.addEventListener('load',runReveal);runReveal();
+</script>
+</body>
+</html>

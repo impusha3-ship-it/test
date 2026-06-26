@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>О & Д — Midnight Aurora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080a14;--panel:rgba(255,255,255,.045);--line:rgba(255,255,255,.10);
+  --ink:#eef1fb;--ink2:#aeb6d4;--mut:#7b85a6;
+  --cyan:#6fe0ff;--violet:#c77bff;--pink:#ff7ab0;
+  --grad:linear-gradient(100deg,#6fe0ff,#c77bff 52%,#ff7ab0);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--ink);min-height:100vh;background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+/* drifting aurora */
+.sky{position:fixed;inset:0;z-index:-2;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;will-change:transform}
+.b1{width:55vw;height:55vw;left:-10vw;top:-12vw;background:radial-gradient(circle,rgba(80,130,255,.7),transparent 65%);animation:fl1 32s ease-in-out infinite alternate}
+.b2{width:48vw;height:48vw;right:-12vw;bottom:-14vw;background:radial-gradient(circle,rgba(220,90,200,.62),transparent 65%);animation:fl2 40s ease-in-out infinite alternate}
+.b3{width:42vw;height:42vw;left:34vw;top:42vh;background:radial-gradient(circle,rgba(60,210,220,.42),transparent 65%);animation:fl3 48s ease-in-out infinite alternate}
+@keyframes fl1{to{transform:translate(8vw,6vh) scale(1.15)}}
+@keyframes fl2{to{transform:translate(-7vw,-5vh) scale(.92)}}
+@keyframes fl3{to{transform:translate(-6vw,4vh) scale(1.1)}}
+.stars{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cg fill='white' fill-opacity='0.6'%3E%3Ccircle cx='40' cy='60' r='.7'/%3E%3Ccircle cx='160' cy='30' r='.5'/%3E%3Ccircle cx='280' cy='110' r='.8'/%3E%3Ccircle cx='350' cy='220' r='.5'/%3E%3Ccircle cx='90' cy='200' r='.6'/%3E%3Ccircle cx='210' cy='300' r='.7'/%3E%3Ccircle cx='330' cy='350' r='.5'/%3E%3Ccircle cx='30' cy='330' r='.6'/%3E%3C/g%3E%3C/svg%3E");opacity:.5}
+.noise{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")}
+@media(prefers-reduced-motion:reduce){.blob{animation:none}}
+
+h1,h2,h3,.serif{font-family:'Fraunces',serif;font-weight:500}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:1.5rem;padding:1.1rem 2rem;
+  backdrop-filter:blur(16px);background:rgba(8,10,20,.55);border-bottom:1px solid var(--line)}
+.logo{font-family:'Fraunces',serif;font-size:22px;letter-spacing:.04em}
+.logo em{font-style:italic}
+.tabs{display:flex;gap:.3rem;margin-left:auto;flex-wrap:wrap}
+.tab{background:none;border:none;color:var(--mut);font-family:'Manrope';font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:.5rem .9rem;cursor:pointer;border-radius:99px;transition:.25s}
+.tab:hover{color:var(--ink)}
+.tab.on{color:#08101e;background:var(--grad);font-weight:600}
+.back{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);text-decoration:none;border:1px solid var(--line);padding:.45rem .9rem;border-radius:99px;transition:.25s}
+.back:hover{color:var(--ink);border-color:rgba(255,255,255,.3)}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 2rem 7rem}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* hero */
+.hero{text-align:center;padding:6rem 1rem 4rem}
+.hero .kick{font-size:12px;letter-spacing:.45em;text-transform:uppercase;color:var(--mut);margin-bottom:1.6rem}
+.bignum{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(96px,22vw,260px);line-height:.86;letter-spacing:-.02em;position:relative;display:inline-block}
+.bignum em{font-style:italic}
+.glow{filter:drop-shadow(0 0 40px rgba(120,150,255,.45))}
+.unit{font-size:13px;letter-spacing:.45em;text-transform:uppercase;color:var(--ink2);margin-top:1.4rem}
+.clock{display:flex;justify-content:center;gap:1.2rem;margin-top:2.6rem;flex-wrap:wrap}
+.cu{min-width:84px;padding:1rem .6rem;border:1px solid var(--line);border-radius:16px;background:var(--panel);backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
+.cu b{display:block;font-family:'Fraunces',serif;font-size:38px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1}
+.cu span{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);margin-top:6px;display:block}
+.since{font-family:'Fraunces',serif;font-style:italic;font-size:19px;color:var(--ink2);margin-top:2rem}
+
+.sectit{display:flex;align-items:baseline;gap:1rem;margin:0 0 1.6rem}
+.sectit h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.01em}
+.sectit .n{font-family:'Manrope';font-size:12px;letter-spacing:.3em;color:var(--mut);text-transform:uppercase}
+.line{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+/* glass card base */
+.glass{border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(14px);border-radius:20px;
+  box-shadow:0 30px 60px -34px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.07);
+  transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s,border-color .4s}
+.glass:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.22);box-shadow:0 44px 80px -30px rgba(0,0,0,.9)}
+
+/* profiles */
+.profiles{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:3rem}
+@media(max-width:680px){.profiles{grid-template-columns:1fr}}
+.pcard{padding:1.7rem;position:relative;overflow:hidden}
+.pcard .who{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--mut)}
+.pcard .task{font-family:'Fraunces';font-style:italic;font-size:19px;color:var(--ink2);margin:.4rem 0 1rem}
+.streak{font-family:'Fraunces';font-size:54px;font-weight:500;line-height:1;font-variant-numeric:tabular-nums}
+.streak span{font-family:'Manrope';font-size:13px;color:var(--mut);margin-left:8px;font-weight:400}
+.bar{height:6px;border-radius:99px;background:rgba(255,255,255,.08);margin-top:1.1rem;overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:99px;transition:width 1.3s cubic-bezier(.22,1,.36,1)}
+.pcard.d .bar i{background:linear-gradient(90deg,#6fe0ff,#5a8bff)}
+.pcard.o .bar i{background:linear-gradient(90deg,#ff7ab0,#c77bff)}
+.flame{position:absolute;top:1.3rem;right:1.4rem;font-size:22px;filter:drop-shadow(0 0 10px rgba(255,150,80,.7))}
+
+/* milestones */
+.ms-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.ms{padding:1.5rem}
+.ms .l{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mut)}
+.ms .v{font-family:'Fraunces';font-size:40px;font-weight:500;margin-top:.4rem;line-height:1}
+.ms .s{font-size:13px;color:var(--ink2);margin-top:.3rem}
+
+/* letters */
+.lt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.env{padding:1.5rem;min-height:170px;display:flex;flex-direction:column;cursor:pointer;position:relative;overflow:hidden}
+.env::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.04));pointer-events:none}
+.env .from{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+.wax{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces';font-style:italic;font-size:18px;color:#0a0e1a;margin:.7rem 0;
+  background:radial-gradient(circle at 35% 30%,#ffd0ec,#ff7ab0);box-shadow:0 0 22px rgba(255,122,176,.6)}
+.env.d .wax{background:radial-gradient(circle at 35% 30%,#bfeeff,#6fe0ff);box-shadow:0 0 22px rgba(111,224,255,.55)}
+.env .status{margin-top:auto;font-size:13px;color:var(--ink2);display:flex;align-items:center;gap:7px}
+.env .preview{font-family:'Fraunces';font-style:italic;font-size:17px;color:var(--ink);line-height:1.4}
+.env.unlocked{border-color:rgba(199,123,255,.5)}
+.hint{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--violet);margin-top:.6rem}
+
+/* achievements */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.ach{padding:1.1rem 1.2rem;display:flex;align-items:center;gap:.9rem;position:relative;overflow:hidden}
+.ach .ico{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;
+  border:1px solid var(--line);background:rgba(255,255,255,.04)}
+.ach .txt{font-family:'Fraunces';font-size:17px;font-weight:500;line-height:1.25}
+.ach.done{border-color:rgba(199,123,255,.45);background:linear-gradient(135deg,rgba(199,123,255,.14),rgba(111,224,255,.07))}
+.ach.done .ico{background:var(--grad);border-color:transparent}
+.ach .tick{margin-left:auto;width:22px;height:22px;border-radius:50%;background:var(--grad);color:#0a0e1a;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.ach:not(.done) .tick{display:none}
+
+.page{display:none}.page.on{display:block}
+.foot{text-align:center;color:var(--mut);font-size:13px;margin-top:5rem;letter-spacing:.05em}
+</style>
+</head>
+<body>
+<div class="sky"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="stars"></div><div class="noise"></div>
+
+<nav class="nav">
+  <div class="logo">О <em>&amp;</em> Д</div>
+  <div class="tabs">
+    <button class="tab on" data-p="together">Вместе</button>
+    <button class="tab" data-p="cal">Календарь</button>
+    <button class="tab" data-p="letters">Письма</button>
+    <button class="tab" data-p="ach">Достижения</button>
+  </div>
+  <a class="back" href="index.html">← все стили</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- TOGETHER -->
+  <section class="page on" id="together">
+    <div class="hero">
+      <div class="kick reveal">мы вместе уже</div>
+      <div class="bignum glow grad reveal">847</div>
+      <div class="unit reveal">дней рядом</div>
+      <div class="clock reveal">
+        <div class="cu glass"><b>2</b><span>года</span></div>
+        <div class="cu glass"><b>3</b><span>мес</span></div>
+        <div class="cu glass"><b>27</b><span>дней</span></div>
+        <div class="cu glass"><b>13</b><span>часов</span></div>
+      </div>
+      <div class="since reveal">с 28 февраля 2024 — и каждый день считается</div>
+    </div>
+
+    <div class="sectit reveal"><span class="n">01</span><h2 class="serif">Наши вехи</h2><span class="line"></span></div>
+    <div class="ms-grid reveal">
+      <div class="ms glass"><div class="l">первый поцелуй</div><div class="v grad">847</div><div class="s">дней назад</div></div>
+      <div class="ms glass"><div class="l">путешествий</div><div class="v">6</div><div class="s">городов вдвоём</div></div>
+      <div class="ms glass"><div class="l">общих утра</div><div class="v">312</div><div class="s">кофе на двоих</div></div>
+      <div class="ms glass"><div class="l">до годовщины №3</div><div class="v grad">158</div><div class="s">дней осталось</div></div>
+    </div>
+  </section>
+
+  <!-- CALENDAR -->
+  <section class="page" id="cal">
+    <div style="height:3rem"></div>
+    <div class="sectit reveal"><span class="n">02</span><h2 class="serif">Привычки и серии</h2><span class="line"></span></div>
+    <div class="profiles">
+      <div class="pcard glass d reveal">
+        <div class="flame">🔥</div>
+        <div class="who">Дима</div>
+        <div class="task serif">тренировка + без сахара</div>
+        <div class="streak">23<span>дня подряд</span></div>
+        <div class="bar"><i data-w="76"></i></div>
+      </div>
+      <div class="pcard glass o reveal">
+        <div class="flame">🔥</div>
+        <div class="who">Оля</div>
+        <div class="task serif">йога каждое утро</div>
+        <div class="streak">31<span>день подряд</span></div>
+        <div class="bar"><i data-w="91"></i></div>
+      </div>
+    </div>
+    <p class="since reveal" style="margin-top:0">Зелёные дни — выполнили оба. Серия не прерывалась с начала месяца.</p>
+  </section>
+
+  <!-- LETTERS -->
+  <section class="page" id="letters">
+    <div style="height:3rem"></div>
+    <div class="sectit reveal"><span class="n">03</span><h2 class="serif">Запечатанные письма</h2><span class="line"></span></div>
+    <div class="lt-grid reveal">
+      <div class="env glass d unlocked"><div class="from">от Димы</div><div class="wax">Д</div><div class="preview">«Открой, когда будет тяжело…»</div><div class="hint">нажми, чтобы открыть</div></div>
+      <div class="env glass o"><div class="from">от Оли</div><div class="wax">О</div><div class="status">🔒 откроется 31 декабря</div></div>
+      <div class="env glass d"><div class="from">от Димы</div><div class="wax">Д</div><div class="status">🔒 откроется в годовщину</div></div>
+      <div class="env glass o unlocked"><div class="from">от Оли</div><div class="wax">О</div><div class="preview">«Спасибо, что ты есть…»</div><div class="hint">нажми, чтобы открыть</div></div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section class="page" id="ach">
+    <div style="height:3rem"></div>
+    <div class="sectit reveal"><span class="n">04</span><h2 class="serif">Достижения <span class="grad">14/22</span></h2><span class="line"></span></div>
+    <div class="ach-grid reveal">
+      <div class="ach glass done"><div class="ico">💌</div><div class="txt">Первое письмо</div><div class="tick">✓</div></div>
+      <div class="ach glass done"><div class="ico">🌍</div><div class="txt">Первое путешествие</div><div class="tick">✓</div></div>
+      <div class="ach glass done"><div class="ico">🔥</div><div class="txt">Серия 7 дней</div><div class="tick">✓</div></div>
+      <div class="ach glass"><div class="ico">🏔️</div><div class="txt">10 городов вдвоём</div></div>
+      <div class="ach glass done"><div class="ico">🌙</div><div class="txt">100 дней вместе</div><div class="tick">✓</div></div>
+      <div class="ach glass"><div class="ico">💍</div><div class="txt">1000 дней</div></div>
+    </div>
+  </section>
+
+  <div class="foot">Midnight Aurora · концепт 01 · <a href="index.html" style="color:var(--violet);text-decoration:none">← к остальным стилям</a></div>
+</div>
+
+<script>
+// tabs
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
+  t.classList.add('on');
+  document.getElementById(t.dataset.p).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+  runReveal();
+}));
+// scroll reveal
+function runReveal(){
+  document.querySelectorAll('.page.on .reveal').forEach((el,i)=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight-60){setTimeout(()=>el.classList.add('in'),i*70)}
+  });
+  document.querySelectorAll('.page.on .bar i').forEach(b=>b.style.width=b.dataset.w+'%');
+}
+window.addEventListener('scroll',runReveal,{passive:true});
+window.addEventListener('load',runReveal);runReveal();
+</script>
+</body>
+</html>

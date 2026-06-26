@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>О & Д — Vintage Postcard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --kraft:#efe6d2;--kraft2:#e6dabf;--ink:#2b2417;--ink2:#5a4f3a;--mut:#8a7b5e;
+  --sepia:#8a6a3a;--sepia-d:#6b4f24;--red:#b23b2e;--red-d:#8f2c20;--line:#cdbf9e;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background:var(--kraft);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% -10%,rgba(138,106,58,.18),transparent 60%),
+    radial-gradient(circle at 100% 100%,rgba(0,0,0,.10),transparent 45%),
+    radial-gradient(circle at 0% 100%,rgba(0,0,0,.08),transparent 45%)}
+/* aged paper grain + vignette */
+body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E")}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;box-shadow:inset 0 0 160px 30px rgba(60,40,15,.28)}
+
+h1,h2,h3,.serif{font-family:'DM Serif Display',serif;font-weight:400}
+.it{font-style:italic}
+
+.nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:1.2rem;padding:1rem 2rem;
+  background:rgba(239,230,210,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.logo{font-family:'DM Serif Display';font-size:25px;letter-spacing:.02em}
+.logo em{color:var(--red);font-style:italic}
+.tabs{display:flex;gap:.2rem;margin-left:auto;flex-wrap:wrap}
+.tab{background:none;border:none;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);padding:.5rem .9rem;cursor:pointer;transition:.25s;font-weight:500}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--red);border-bottom:2px solid var(--red)}
+.back{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);text-decoration:none;border:1px solid var(--ink);padding:.45rem .9rem;transition:.25s}
+.back:hover{background:var(--red);color:var(--kraft);border-color:var(--red)}
+
+.wrap{max-width:1060px;margin:0 auto;padding:2.5rem 2rem 7rem}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* postcard hero */
+.postcard{border:1px solid var(--ink);background:repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(138,106,58,.07) 28px);position:relative;
+  box-shadow:0 24px 50px -28px rgba(60,40,15,.6);padding:2.4rem;display:grid;grid-template-columns:1.5fr 1fr;gap:1.5rem}
+@media(max-width:680px){.postcard{grid-template-columns:1fr}}
+.pc-left{border-right:1px dashed var(--line);padding-right:1.5rem}
+@media(max-width:680px){.pc-left{border-right:none;border-bottom:1px dashed var(--line);padding-right:0;padding-bottom:1.5rem}}
+.pc-kick{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--mut);margin-bottom:.8rem}
+.pc-big{font-family:'DM Serif Display';font-size:clamp(72px,15vw,150px);line-height:.85;color:var(--sepia-d)}
+.pc-big em{font-style:italic;color:var(--red)}
+.pc-unit{font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink2);margin-top:.8rem}
+.pc-msg{font-family:'DM Serif Display';font-style:italic;font-size:19px;color:var(--ink2);margin-top:1.4rem;line-height:1.4}
+.pc-right{display:flex;flex-direction:column;align-items:flex-end;gap:1rem}
+/* postage stamp */
+.pstamp{width:104px;height:124px;background:var(--kraft2);padding:7px;
+  -webkit-mask:radial-gradient(circle 5px,transparent 96%,#000) -9px -9px / 18px 18px round;
+  mask:radial-gradient(circle 5px,transparent 96%,#000) -9px -9px / 18px 18px round;
+  border:0;position:relative}
+.pstamp-in{width:100%;height:100%;border:1px solid var(--sepia-d);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  background:radial-gradient(circle at 50% 35%,rgba(178,59,46,.16),transparent 65%)}
+.pstamp b{font-family:'DM Serif Display';font-size:34px;color:var(--red);line-height:1}
+.pstamp small{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--sepia-d)}
+/* postmark */
+.postmark{width:108px;height:108px;border:2px solid var(--ink);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink);transform:rotate(-11deg);opacity:.75;text-align:center}
+.postmark b{font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+.postmark .yr{font-family:'DM Serif Display';font-size:22px;line-height:1;margin:2px 0}
+.postmark .wave{width:70px;height:1px;background:var(--ink);box-shadow:0 4px 0 var(--ink),0 8px 0 var(--ink)}
+
+.sec{margin-top:3.5rem}
+.sectit{display:flex;align-items:center;gap:1rem;margin-bottom:1.7rem}
+.sectit h2{font-size:clamp(26px,4vw,38px)}
+.sectit .dash{flex:1;border-top:2px dashed var(--line)}
+.sectit .pin{color:var(--red);font-size:16px}
+
+/* clock — luggage tags */
+.clock{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.cu{min-width:90px;padding:1rem .8rem;text-align:center;background:var(--kraft2);border:1px solid var(--ink);position:relative}
+.cu::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:8px;height:8px;border:1px solid var(--ink);border-radius:50%}
+.cu b{font-family:'DM Serif Display';font-size:42px;display:block;line-height:1;color:var(--sepia-d);margin-top:10px}
+.cu span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+
+/* route milestones */
+.route{position:relative;padding-left:1.5rem}
+.route::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;border-left:2px dashed var(--sepia)}
+.stop{position:relative;display:flex;align-items:baseline;gap:1rem;padding:.9rem 0;border-bottom:1px dotted var(--line)}
+.stop::before{content:'';position:absolute;left:-1.5rem;top:1.3rem;width:13px;height:13px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px var(--kraft),0 0 0 4px var(--red)}
+.stop .v{font-family:'DM Serif Display';font-size:34px;color:var(--sepia-d);min-width:90px;line-height:1}
+.stop .t{font-size:15px;color:var(--ink2)}
+.stop .t b{font-family:'DM Serif Display';font-weight:400;font-size:18px;color:var(--ink);display:block}
+
+/* profiles */
+.profiles{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.profiles{grid-template-columns:1fr}}
+.pcard{border:1px solid var(--ink);background:var(--kraft2);padding:1.6rem;position:relative;box-shadow:5px 5px 0 rgba(60,40,15,.15)}
+.pcard .who{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.pcard .task{font-family:'DM Serif Display';font-style:italic;font-size:18px;color:var(--ink2);margin:.4rem 0 1rem}
+.pcard .streak{font-family:'DM Serif Display';font-size:54px;line-height:1;color:var(--red)}
+.pcard.d .streak{color:var(--sepia-d)}
+.pcard .streak span{font-family:'Jost';font-size:13px;color:var(--mut);margin-left:8px}
+.miles{display:flex;align-items:center;gap:4px;margin-top:1.1rem;color:var(--sepia)}
+.miles i{width:10px;height:10px;border:1px solid var(--sepia);border-radius:50%}
+.miles i.f{background:var(--sepia)}
+.pcard.o .miles i.f{background:var(--red);border-color:var(--red)}
+.pcard.o .miles i{border-color:var(--red)}
+
+/* letters as postcards */
+.lt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.env{border:1px solid var(--ink);background:var(--kraft2);padding:1.4rem;min-height:175px;display:flex;flex-direction:column;cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s}
+.env::after{content:'';position:absolute;top:10px;right:10px;width:30px;height:36px;background:var(--kraft);border:1px dashed var(--sepia);opacity:.6}
+.env:hover{transform:rotate(-1deg) translateY(-3px);box-shadow:6px 6px 0 rgba(60,40,15,.18)}
+.env .from{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.wax{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--kraft);
+  font-family:'DM Serif Display';font-style:italic;font-size:19px;margin:.7rem 0;background:var(--red);box-shadow:inset 0 0 0 2px rgba(255,255,255,.25)}
+.env.d .wax{background:var(--sepia-d)}
+.env .status{margin-top:auto;font-size:13.5px;color:var(--ink2)}
+.env .preview{font-family:'DM Serif Display';font-style:italic;font-size:17px;line-height:1.4;color:var(--ink)}
+.env.unlocked{border-style:solid}
+.hint{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-top:.6rem}
+
+/* achievements as stamps */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.ach{border:1px solid var(--ink);background:var(--kraft2);padding:1rem 1.1rem;display:flex;align-items:center;gap:.8rem}
+.ach .ico{width:40px;height:40px;border:1px dashed var(--sepia);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.ach .txt{font-family:'DM Serif Display';font-size:17px;line-height:1.2}
+.ach.done{background:var(--ink);color:var(--kraft);border-color:var(--ink)}
+.ach.done .ico{border-color:var(--red);border-style:solid;background:var(--red);color:var(--kraft)}
+.ach .tick{margin-left:auto;font-family:'DM Serif Display';color:var(--red);flex-shrink:0}
+.ach:not(.done) .tick{display:none}
+
+.page{display:none}.page.on{display:block}
+.foot{margin-top:5rem;padding-top:1.5rem;border-top:2px dashed var(--line);text-align:center;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.foot a{color:var(--red);text-decoration:none}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="logo">О <em>&amp;</em> Д</div>
+  <div class="tabs">
+    <button class="tab on" data-p="together">Вместе</button>
+    <button class="tab" data-p="cal">Календарь</button>
+    <button class="tab" data-p="letters">Письма</button>
+    <button class="tab" data-p="ach">Достижения</button>
+  </div>
+  <a class="back" href="index.html">← стили</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- TOGETHER -->
+  <section class="page on" id="together">
+    <div class="postcard reveal">
+      <div class="pc-left">
+        <div class="pc-kick">путешествие вдвоём · день</div>
+        <div class="pc-big">8<em>4</em>7</div>
+        <div class="pc-unit">дней в пути</div>
+        <div class="pc-msg">«Дорогой дневник, мы всё ещё едем — и маршрут лучше, чем на карте.»</div>
+      </div>
+      <div class="pc-right">
+        <div class="pstamp"><div class="pstamp-in"><b>847</b><small>О &amp; Д</small></div></div>
+        <div class="postmark"><b>отправлено</b><div class="yr">2024</div><div class="wave"></div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sectit reveal"><span class="pin">✦</span><h2 class="serif">Сколько в пути</h2><span class="dash"></span></div>
+      <div class="clock reveal">
+        <div class="cu"><b>2</b><span>года</span></div>
+        <div class="cu"><b>3</b><span>месяца</span></div>
+        <div class="cu"><b>27</b><span>дней</span></div>
+        <div class="cu"><b>13</b><span>часов</span></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sectit reveal"><span class="pin">✦</span><h2 class="serif">Маршрут наших вех</h2><span class="dash"></span></div>
+      <div class="route reveal">
+        <div class="stop"><div class="v">847</div><div class="t"><b>Первый поцелуй</b>отметка, с которой начался отсчёт</div></div>
+        <div class="stop"><div class="v">6</div><div class="t"><b>Городов вдвоём</b>штампы в общем паспорте впечатлений</div></div>
+        <div class="stop"><div class="v">312</div><div class="t"><b>Общих утра</b>кофе на двоих перед дорогой</div></div>
+        <div class="stop"><div class="v">158</div><div class="t"><b>До годовщины №3</b>следующая станция на маршруте</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALENDAR -->
+  <section class="page" id="cal">
+    <div class="sec" style="margin-top:1rem">
+      <div class="sectit reveal"><span class="pin">✦</span><h2 class="serif">Привычки в дороге</h2><span class="dash"></span></div>
+      <div class="profiles">
+        <div class="pcard d reveal">
+          <div class="who">Дима</div>
+          <div class="task">тренировка + без сахара</div>
+          <div class="streak">23<span>дня подряд</span></div>
+          <div class="miles"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i> &nbsp;<span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase">этой недели</span></div>
+        </div>
+        <div class="pcard o reveal">
+          <div class="who">Оля</div>
+          <div class="task">йога каждое утро</div>
+          <div class="streak">31<span>день подряд</span></div>
+          <div class="miles"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i> &nbsp;<span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase">этой недели</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LETTERS -->
+  <section class="page" id="letters">
+    <div class="sec" style="margin-top:1rem">
+      <div class="sectit reveal"><span class="pin">✦</span><h2 class="serif">Открытки друг другу</h2><span class="dash"></span></div>
+      <div class="lt-grid reveal">
+        <div class="env d unlocked"><div class="from">от Димы</div><div class="wax">Д</div><div class="preview">«Открой, когда будет тяжело…»</div><div class="hint">перевернуть открытку</div></div>
+        <div class="env o"><div class="from">от Оли</div><div class="wax">О</div><div class="status">🔒 штемпель: 31 декабря</div></div>
+        <div class="env d"><div class="from">от Димы</div><div class="wax">Д</div><div class="status">🔒 штемпель: годовщина</div></div>
+        <div class="env o unlocked"><div class="from">от Оли</div><div class="wax">О</div><div class="preview">«Спасибо, что ты есть…»</div><div class="hint">перевернуть открытку</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section class="page" id="ach">
+    <div class="sec" style="margin-top:1rem">
+      <div class="sectit reveal"><span class="pin">✦</span><h2 class="serif">Марки достижений · 14/22</h2><span class="dash"></span></div>
+      <div class="ach-grid reveal">
+        <div class="ach done"><div class="ico">💌</div><div class="txt">Первое письмо</div><div class="tick">✓</div></div>
+        <div class="ach done"><div class="ico">🌍</div><div class="txt">Первое путешествие</div><div class="tick">✓</div></div>
+        <div class="ach done"><div class="ico">🔥</div><div class="txt">Серия 7 дней</div><div class="tick">✓</div></div>
+        <div class="ach"><div class="ico">🏔️</div><div class="txt">10 городов вдвоём</div></div>
+        <div class="ach done"><div class="ico">🌙</div><div class="txt">100 дней вместе</div><div class="tick">✓</div></div>
+        <div class="ach"><div class="ico">💍</div><div class="txt">1000 дней</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">Vintage Postcard · концепт 04 · <a href="index.html">← к остальным стилям</a></div>
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
+  t.classList.add('on');document.getElementById(t.dataset.p).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});runReveal();
+}));
+function runReveal(){
+  document.querySelectorAll('.page.on .reveal').forEach((el,i)=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight-60){setTimeout(()=>el.classList.add('in'),i*70)}
+  });
+}
+window.addEventListener('scroll',runReveal,{passive:true});
+window.addEventListener('load',runReveal);runReveal();
+</script>
+</body>
+</html>

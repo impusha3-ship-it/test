@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>О & Д — 4 концепта оформления</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0b0d16;--ink:#eef0f8;--ink2:#aab2cc;--mut:#7a829c}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Manrope',sans-serif;color:#eef0f8;min-height:100vh;
+  background:#0b0d16;
+  background-image:
+    radial-gradient(ellipse 60% 50% at 15% 0%, rgba(86,120,255,0.18),transparent 60%),
+    radial-gradient(ellipse 50% 60% at 90% 100%, rgba(220,80,200,0.16),transparent 60%),
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(60,200,210,0.08),transparent 70%);
+  -webkit-font-smoothing:antialiased;
+}
+.grain{position:fixed;inset:0;pointer-events:none;opacity:.04;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");}
+.wrap{max-width:1180px;margin:0 auto;padding:5rem 2rem 6rem;position:relative;z-index:1}
+.kick{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:#7a829c;margin-bottom:1.4rem}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(40px,7vw,82px);line-height:.98;letter-spacing:-.02em;margin-bottom:1.2rem}
+h1 em{font-style:italic;background:linear-gradient(100deg,#6fd9ff,#c77bff 55%,#ff7ab0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lead{max-width:560px;color:#aab2cc;font-size:18px;line-height:1.6;font-weight:300}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:3.5rem}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.card{
+  position:relative;display:block;text-decoration:none;color:inherit;overflow:hidden;
+  border-radius:20px;padding:2rem;min-height:240px;
+  border:1px solid rgba(255,255,255,.09);
+  background:rgba(255,255,255,.03);
+  backdrop-filter:blur(8px);
+  box-shadow:0 30px 60px -30px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.06);
+  transition:transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s, border-color .4s;
+  opacity:0;transform:translateY(26px);animation:up .8s cubic-bezier(.22,1,.36,1) forwards;
+}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.16s}
+.card:nth-child(3){animation-delay:.27s}.card:nth-child(4){animation-delay:.38s}
+.card:nth-child(5){animation-delay:.49s}
+@keyframes up{to{opacity:1;transform:none}}
+.card:hover{transform:translateY(-6px) scale(1.012);border-color:rgba(255,255,255,.2);box-shadow:0 40px 80px -28px rgba(0,0,0,.9)}
+.swatch{display:flex;gap:8px;margin-bottom:1.6rem}
+.swatch i{width:30px;height:30px;border-radius:8px;display:block;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.cnum{font-family:'Fraunces',serif;font-size:14px;color:#7a829c;letter-spacing:.1em}
+.cname{font-family:'Fraunces',serif;font-size:30px;font-weight:600;margin:.5rem 0 .5rem;letter-spacing:-.01em}
+.cdesc{color:#9aa2bc;font-size:14.5px;line-height:1.55;font-weight:300}
+.go{position:absolute;right:1.8rem;bottom:1.8rem;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#cfd5ec;opacity:0;transform:translateX(-8px);transition:.4s}
+.card:hover .go{opacity:1;transform:none}
+.foot{margin-top:3rem;color:#646c88;font-size:13px;letter-spacing:.05em}
+.aurora{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none}
+.c1 .aurora{background:radial-gradient(120% 90% at 20% 10%,rgba(80,130,255,.45),transparent 55%),radial-gradient(110% 80% at 95% 95%,rgba(210,80,200,.4),transparent 55%)}
+.c2 .aurora{background:radial-gradient(120% 90% at 80% 10%,rgba(232,80,58,.32),transparent 55%),radial-gradient(110% 80% at 10% 95%,rgba(42,74,138,.4),transparent 55%)}
+.c3 .aurora{background:radial-gradient(120% 90% at 20% 10%,rgba(122,158,120,.38),transparent 55%),radial-gradient(110% 80% at 95% 95%,rgba(196,122,90,.34),transparent 55%)}
+.c4 .aurora{background:radial-gradient(120% 90% at 80% 10%,rgba(138,106,58,.4),transparent 55%),radial-gradient(110% 80% at 10% 95%,rgba(178,59,46,.3),transparent 55%)}
+.c5 .aurora{background:radial-gradient(120% 90% at 20% 10%,rgba(220,60,60,.35),transparent 55%),radial-gradient(110% 80% at 95% 95%,rgba(255,200,50,.3),transparent 55%)}
+.card>*{position:relative;z-index:1}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="wrap">
+  <div class="kick">О &amp; Д · концепты оформления</div>
+  <h1>Четыре <em>настроения</em><br>для одного сайта</h1>
+  <p class="lead">Тематика та же — приватный сайт пары: календарь привычек, счётчик дней вместе, письма, достижения. Открой любой вариант и посмотри разницу вживую.</p>
+
+  <div class="grid">
+    <a class="card c1" href="1-midnight-aurora.html">
+      <div class="aurora"></div>
+      <div class="swatch"><i style="background:#0a0e1a"></i><i style="background:#6fd9ff"></i><i style="background:#c77bff"></i><i style="background:#ff7ab0"></i></div>
+      <div class="cnum">01</div>
+      <div class="cname">Midnight Aurora</div>
+      <div class="cdesc">Тёмный премиум-режим: полночная синь, aurora-градиенты, стекло и мягкое свечение. Кинематографично и дорого.</div>
+      <div class="go">смотреть →</div>
+    </a>
+
+    <a class="card c2" href="2-letterpress-zine.html">
+      <div class="aurora"></div>
+      <div class="swatch"><i style="background:#f4ede0"></i><i style="background:#e8503a"></i><i style="background:#2a4a8a"></i><i style="background:#1c1a17"></i></div>
+      <div class="cnum">02</div>
+      <div class="cname">Letterpress Zine</div>
+      <div class="cdesc">Тёплая бумага и ризограф-печать: горчично-красный и синий, крупный гротеск, зерно. Аналоговая любовная записка.</div>
+      <div class="go">смотреть →</div>
+    </a>
+
+    <a class="card c3" href="3-botanical-bloom.html">
+      <div class="aurora"></div>
+      <div class="swatch"><i style="background:#eef0e6"></i><i style="background:#7a9e78"></i><i style="background:#c47a5a"></i><i style="background:#3a4a38"></i></div>
+      <div class="cnum">03</div>
+      <div class="cname">Botanical Bloom</div>
+      <div class="cdesc">Органика и спокойствие: шалфей и терракота, ботанические линии, метафора роста — «растём вместе».</div>
+      <div class="go">смотреть →</div>
+    </a>
+
+    <a class="card c4" href="4-vintage-postcard.html">
+      <div class="aurora"></div>
+      <div class="swatch"><i style="background:#efe6d2"></i><i style="background:#8a6a3a"></i><i style="background:#b23b2e"></i><i style="background:#2b2417"></i></div>
+      <div class="cnum">04</div>
+      <div class="cname">Vintage Postcard</div>
+      <div class="cdesc">Ретро-путешествие: крафт, сепия, марки и штемпели. Письма как открытки, события — пункты маршрута.</div>
+      <div class="go">смотреть →</div>
+    </a>
+    <a class="card c5" href="shanghai-guide/index.html">
+      <div class="aurora"></div>
+      <div class="swatch"><i style="background:#c0392b"></i><i style="background:#f39c12"></i><i style="background:#1a1a2e"></i><i style="background:#e8d5b7"></i></div>
+      <div class="cnum">上海</div>
+      <div class="cname">Шанхай</div>
+      <div class="cdesc">Путеводитель: 27 мест с фото, описаниями и временем пути от гостиницы — от Нефритового Будды до Чжуцзяцзяо.</div>
+      <div class="go">открыть →</div>
+    </a>
+  </div>
+
+  <div class="foot">Совет: открой каждый и пролистай до конца — анимации появляются по скроллу.</div>
+</div>
+</body>
+</html>
